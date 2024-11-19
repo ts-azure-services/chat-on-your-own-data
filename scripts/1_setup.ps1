@@ -3,6 +3,12 @@
 # # Login to Azure
 # Connect-AzAccount
 
+# Prompt the user for the subscription, no validation checking
+$sub_id = Read-Host -Prompt "Please enter your Azure subscription: "
+$sub_id = $sub_id.Trim()
+
+Set-AzContext -SubscriptionId $sub_id
+
 Write-Host -ForegroundColor Blue "Check if Az.Search module installed..."
 if (Get-Module -ListAvailable -Name "Az.Search") 
     { Write-Host "Module is installed." } 
@@ -19,7 +25,13 @@ $storageAccountName = "storage$rand_number"
 $searchServiceName = "search$rand_number"
 $oaiResource = "oai$rand_number"
 $containerName = "container$rand_number"
-$user="<enter the User Principal Name, from Microsoft Entra ID in the Azure Portal>"
+
+# Prompt the user for input and store it in a variable, no validation checking
+$user_principal_name = Read-Host -Prompt "Please enter your User Principal Name (from MSFT Entra ID): "
+
+# Trim any leading or trailing whitespace
+$user = $user_principal_name.Trim()
+# $user="<enter the User Principal Name, from Microsoft Entra ID in the Azure Portal>"
 
 
 Write-Host -ForegroundColor Blue "Creating a resource group..."
