@@ -119,16 +119,16 @@ else
   }
 
 
-# Write-Host -ForegroundColor Blue "Enable CORS rules..."
-# # $CorsRules = (@{
-# # 	AllowedOrigins=@(*);
-# # 	AllowedHeaders=@(*);
-# # 	ExposedHeaders=@(*);
-# # 	MaxAgeInSeconds=200;
-# # 	AllowedMethods=@("Get","Post","Put","Connect");
-# # })
-# # Set-AzureStorageCORSRule -ServiceType Blob -CorsRules $CorsRules -Context $ctx
-# az storage cors add --methods GET POST PUT OPTIONS --allowed-headers "*" --origins "*" --max-age 300 --services "b" --account-name $storageAccountName
+Write-Host -ForegroundColor Blue "Enable CORS rules..."
+# $CorsRules = (@{
+# 	AllowedOrigins=@(*);
+# 	AllowedHeaders=@(*);
+# 	ExposedHeaders=@(*);
+# 	MaxAgeInSeconds=200;
+# 	AllowedMethods=@("Get","Post","Put","Connect");
+# })
+# Set-AzureStorageCORSRule -ServiceType Blob -CorsRules $CorsRules -Context $ctx
+az storage cors add --methods GET POST PUT OPTIONS --allowed-headers "*" --origins "*" --exposed-headers "*" --max-age 300 --services "b" --account-name $storageAccountName
 
 Write-Host -ForegroundColor Blue "Creating the search account..."
 $search_params = @{
